@@ -1,4 +1,15 @@
 #cloud-config
-password: password
-chpasswd:
-  expire: False
+output: { all: "> /dev/ttyAMA0" }
+users:
+  - name: anya
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: false
+    plain_text_passwd: password
+final_message: |
+  change the world
+  my final message
+  goodbye
+  version: $version
+  timestamp: $timestamp
+  datasource: $datasource
+  uptime: $uptime

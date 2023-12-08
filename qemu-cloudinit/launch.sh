@@ -8,15 +8,16 @@ QEMUARCH=`[ "$ARCH" == "x86_64" ] && echo x86_64 || echo aarch64`
 
 echo Running on $DEBARCH - $QEMUARCH
 
-ls debian-12-genericcloud-$DEBARCH.qcow2 || wget https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-$DEBARCH.qcow2
+rm bionic-server-cloudimg-$DEBARCH.img
+wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-$DEBARCH.img
 
 qemu-system-$QEMUARCH \
-	-net nic \
-	-net user \
 	-M accel=hvf \
 	-m 2G \
 	-cpu host \
 	-serial stdio \
 	-display none \
-	-hda debian-12-genericcloud-$DEBARCH.qcow2 \
+	-hda bionic-server-cloudimg-$DEBARCH.img \
+	-device e1000,netdev=net0 \
+	-netdev user,id=net0,hostfwd=tcp::2222-:22 \
 	-smbios type=1,serial=ds='nocloud;s=http://10.0.2.2:8000/'
