@@ -1,15 +1,22 @@
 #cloud-config
-output: { all: "> /dev/ttyAMA0" }
+cloud_final_modules:
+ - rightscale_userdata
+ - scripts-per-once
+ - scripts-per-boot
+ - scripts-per-instance
+ - [scripts-user, always]
+ - keys-to-console
+ - phone-home
+ - final-message
+password: ubuntu
+chpasswd: { expire: False }
 users:
   - name: anya
-    sudo: ALL=(ALL) NOPASSWD:ALL
-    lock_passwd: false
-    plain_text_passwd: password
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL 
+    ssh_authorized_keys:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFvxXEF5EX02z8V/hHD8vvDBL7fQHxsAhgTs33tBf/zw retpolanne"
 final_message: |
   change the world
   my final message
   goodbye
-  version: $version
-  timestamp: $timestamp
-  datasource: $datasource
-  uptime: $uptime

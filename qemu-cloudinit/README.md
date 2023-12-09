@@ -9,3 +9,7 @@ This repo has a qemu script for running cloudinit on debian.
 ## Launching instance
 
 `./launch.sh`
+
+## SSHing
+
+`ssh -p 2222 anya@localhost`
