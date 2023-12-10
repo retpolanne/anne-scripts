@@ -1,0 +1,19 @@
+#cloud-config
+cloud_final_modules:
+ - rightscale_userdata
+ - scripts-per-once
+ - scripts-per-boot
+ - scripts-per-instance
+ - [scripts-user, always]
+ - keys-to-console
+ - phone-home
+ - final-message
+write_files:
+- content: |
+    hello anya
+  owner: root:root
+  path: /root/anya.txt
+  permissions: '0644'
+final_message: |
+  this script
+  ran from a server
