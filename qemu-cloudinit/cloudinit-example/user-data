@@ -16,6 +16,7 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL 
     ssh_authorized_keys:
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFvxXEF5EX02z8V/hHD8vvDBL7fQHxsAhgTs33tBf/zw retpolanne"
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIERVboJPMyHPqqmW/k7DcbPub9+gEQqGWyBiLi+s2anW"
 final_message: |
   change the world
   my final message
