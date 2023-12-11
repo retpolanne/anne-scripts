@@ -20,6 +20,19 @@ if [ "$ARCH" == "arm64" ]; then
 	PFLASH="-pflash flash0.img -pflash flash1.img"
 fi
 
+echo qemu-system-$QEMUARCH \
+	-M $MACHINE \
+	-m 2G \
+	-cpu host \
+	-serial stdio \
+	-display none \
+	-device virtio-scsi-pci,id=scsi \
+	-hda bionic-server-cloudimg-$DEBARCH.img \
+	-device e1000,netdev=net0 \
+	-netdev user,id=net0,hostfwd=tcp::2222-:22 \
+	-smbios type=1,serial=ds='nocloud-net;s=http://10.0.2.2:8000/' \
+	$PFLASH
+
 qemu-system-$QEMUARCH \
 	-M $MACHINE \
 	-m 2G \
